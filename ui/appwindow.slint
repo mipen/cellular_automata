@@ -1,12 +1,36 @@
-import { Button, VerticalBox } from "std-widgets.slint";
+import { Button, VerticalBox, HorizontalBox, LineEdit } from "std-widgets.slint";
 
 
 export component AppWindow inherits Window {
-    width:1920px;
-    height:1080px;
+    width:1000px;
+    height:1000px;
 
     in property<image> img;
+    in-out property<string> rule;
+    callback submit-clicked();
+    callback text-edited(string);
+    callback text-accepted(string);
+
     VerticalBox {
+        HorizontalBox {
+            LineEdit {
+                enabled: true;
+                placeholder-text: "Enter rule";
+                text: rule;
+                edited(text) => {
+                    root.text-edited(text);
+                }
+                accepted(text) => {
+                    root.text-accepted(text);
+                }
+            }
+            Button {
+                text: "Generate";
+                clicked => {
+                    root.submit-clicked();
+                }
+            }
+        }
         Image {
             source:root.img;
             width:1000px;
