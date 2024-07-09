@@ -27,7 +27,10 @@ fn main() -> Result<(), slint::PlatformError> {
         let ui_handle = ui.as_weak();
         move || {
             let ui = ui_handle.unwrap();
-            let rule = ui.get_rule().parse::<u8>().unwrap();
+            let rule = match (ui.get_rule().parse::<u8>()) {
+                Ok(r) => r,
+                Err(e) => {println!("Enter a number: {}", e); 0},
+            };
             ui.set_img(one_dimensional_ca_capixel(WIDTH, HEIGHT, rule));
         }
     });
