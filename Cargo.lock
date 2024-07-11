@@ -616,6 +616,7 @@ dependencies = [
 name = "cellular_automata"
 version = "0.1.0"
 dependencies = [
+ "once_cell",
  "slint",
  "slint-build",
 ]
